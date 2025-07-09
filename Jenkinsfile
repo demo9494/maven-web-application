@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy to tomcat') {
             steps {
                sshagent(['tomcat']) {
-                sh 'scp *.war ubuntu@13.235.45.237:/opt/apache-tomcat-9.0.107/webapps'
+                sh 'scp target/*.war ubuntu@13.235.45.237:/opt/apache-tomcat-9.0.107/webapps'
    
             }
         }
