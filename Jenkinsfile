@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'slave1' }
     tools{
-        maven 'maven-1'
+        maven 'maven1'
     }
 
     stages {
@@ -13,6 +13,13 @@ pipeline {
         stage('Package the code') {
             steps {
                 sh 'mvn clean package'
+            }
+        }
+        stage('Deploy to tomcat') {
+            steps {
+               sshagent(['tomcat']) {
+                sh 'scp *.war ubuntu@13.235.45.237:/opt/apache-tomcat-9.0.107/webapps'
+   
             }
         }
     }
