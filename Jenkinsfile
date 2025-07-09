@@ -1,5 +1,8 @@
 pipeline {
     agent { label 'slave1' }
+    tools{
+        maven 'maven1'
+    }
 
     stages {
         stage('Bring the code from git') {
@@ -7,5 +10,11 @@ pipeline {
                 git credentialsId: 'git', url: 'https://github.com/demo9494/maven-web-application.git'
             }
         }
+        stage('Package the code') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
     }
 }
+
